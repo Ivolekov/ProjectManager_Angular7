@@ -1,0 +1,19 @@
+<div class="jumbotron">
+  <h1 class="display-4 text-center">Project Details</h1>
+  <hr/>
+  <div>
+    <div class="row">
+        <div class="display-4 col-md-10"><strong>{{ taskService.currentProject?.Title }}</strong></div>
+        <div class="col-md-2 text-right"> {{ taskService.currentProject?.CreateDate | date:'dd/MM/yyyy' }}</div>
+    </div>
+      <div class="col-md-12 m-3"> {{ taskService.currentProject?.Description }}</div>
+  </div>
+  <div class="row">
+      <div class="col-md-5">
+          <app-task-form></app-task-form>
+      </div>
+      <div class="col-md-7">
+          <app-tasks-list></app-tasks-list>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+    <input name="Id" type="hidden" [value]="service.projectFormData.Id">
+    <input name="CreateDate" type="hidden" [value]="service.projectFormData.CreateDate">
+    <div class="requiredField" *ngIf="service.projectFormData.Title == ''|| form.invalid">* Project title is required</div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text bg-white">
+              <i class="fas fa-pen-fancy" title="Project Title" [class.green-icon]="Title.valid"  [class.red-icon]="Title.invalid && Title.touched"></i>
+          </div>
+        </div>
+        <input #Title="ngModel" [(ngModel)]="service.projectFormData.Title" required name="Title" class="form-control" placeholder="Project Title*">
+        
+      </div>
+      <div class="alert alert-danger" *ngIf="isTitleNotValitLenght">The title can not be more then 100 symbols</div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+          <textarea name="Description" rows="10" #Description="ngModel" [(ngModel)]="service.projectFormData.Description" class="form-control" placeholder="Project Description"></textarea>      
+        </div>
+        <div class="alert alert-danger" *ngIf="isDescriptionNotValitLenght">The description can not be more then 250 symbols</div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-success btn-lg btn-block" *ngIf="service.projectFormData.Id == ''" [disabled]="form.invalid"><i class="fas fa-database"></i>Create Project</button>
+        <button class="btn btn-info btn-lg btn-block" *ngIf="service.projectFormData.Id != ''"  [disabled]="form.invalid"><i class="fas fa-edit"></i>Edit Project</button>
+        <button type="reset" class="btn btn-warning btn-lg btn-block" (click)="resetForm(form)" ><i class="fas fa-history"></i>Reset Form</button>
+      </div>
+  </form> 

@@ -1,0 +1,16 @@
+<table class="table table-hover">
+  <tr>
+      <th>Title</th>
+      <th>Decription</th>
+      <th>Created date</th>
+      <th>Tasks</th>
+      <th></th>
+  </tr>
+  <tr *ngFor="let project of service.list" (click)="color='blue'">
+      <td (click)="onSelect(project)" (click)="populateProjectForm(project)">{{ project.Title }} </td>
+      <td (click)="onSelect(project)" (click)="populateProjectForm(project)">{{ project.Description }} </td>
+      <td (click)="onSelect(project)" (click)="populateProjectForm(project)">{{ project.CreateDate  | date: 'dd/MM/yyyy'}} </td>
+      <td (click)="onSelect(project)" (click)="populateProjectForm(project)">{{ project.Tasks.length }} </td>
+      <td><i class="far fa-trash-alt fa-lg text-danger" (click)="deleteProject(project.Id, project.Tasks.length)"></i></td>
+  </tr>
+</table>

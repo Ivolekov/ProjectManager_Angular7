@@ -1,0 +1,16 @@
+<table class="table table-hover">
+    <tr>
+        <th>Name</th>
+        <th>Decription</th>
+        <th>Created date</th>
+        <th>Work Hours</th>
+        <th></th>
+    </tr>
+  <tr *ngFor="let task of taskService.tasksList">
+      <td (click)="populateTaskForm(task)">{{ task.Name }} </td>
+      <td (click)="populateTaskForm(task)">{{ task.Description }} </td>
+      <td (click)="populateTaskForm(task)">{{ task.CreatedDate | date: 'dd/MM/yyyy'}}  </td>
+      <td (click)="populateTaskForm(task)">{{ task.WorkHours }} hr.</td>
+      <td><i class="far fa-trash-alt fa-lg text-danger" (click)="deleteTask(task.Id, task.ProjectId)"></i></td>
+  </tr>
+</table>

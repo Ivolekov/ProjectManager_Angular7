@@ -1,0 +1,41 @@
+<form #form="ngForm" autocomplete="off" (submit)="onSubmitTask(form)">
+  <input name="Id" type="hidden" [value]="taskService.taskFormData.Id">
+  <input name="ProjectId" type="hidden" [value]="taskService.taskFormData.ProjectId">
+  <input name="CreatedDate" type="hidden" [value]="taskService.taskFormData.CreatedDate">
+  <div class="requiredField" *ngIf="taskService.taskFormData.Name == '' || form.invalid">* Task name is required</div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text bg-white">
+            <i class="fas fa-pen-fancy" title="Task Name" [class.green-icon]="Name.valid"  [class.red-icon]="Name.invalid && Name.touched"></i>
+        </div>
+      </div>
+      <input name="Name" #Name="ngModel" [(ngModel)]="taskService.taskFormData.Name" class="form-control" placeholder="Task Name*" maxlength="100" required>
+    </div>
+    <div class="alert alert-danger" *ngIf="isNameNotValitLenght">The task name can not be more then 100 symbols</div>
+  </div>
+  <div class="requiredFieldTransparent" *ngIf="(taskService.taskFormData.WorkHours != 0 && taskService.taskFormData.WorkHours == '') || form.invalid">* Task work hours is required</div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text bg-white">
+            <i class="fas fa-user-clock" [class.green-icon]="WorkHours.valid"  [class.red-icon]="WorkHours.invalid && WorkHours.touched"></i>
+        </div>
+      </div>
+      <input name="WorkHours" type="number"  #WorkHours="ngModel" [(ngModel)]="taskService.taskFormData.WorkHours" min=0 class="form-control" placeholder="Task Work Hours*" required>
+    </div>
+    <div class="alert alert-danger" *ngIf="isWorkHoursNotValid">Task work hours can not be more then 24 or less then 0.1</div>
+  </div>
+  <div class="form-group">
+      <div class="input-group">
+        <textarea name="Description" rows="10" #Description="ngModel" [(ngModel)]="taskService.taskFormData.Description" class="form-control" placeholder="Task Description"></textarea>
+      </div>
+      <div class="alert alert-danger" *ngIf="isDescriptionNotValitLenght">The task description can not be more then 250 symbols</div>
+    </div>
+    <div class="form-group">
+      <!-- <button class="btn btn-success btn-lg btn-block" [disabled]="form.invalid"><i class="fas fa-database"></i> Submit</button> -->
+      <button class="btn btn-success btn-lg btn-block" *ngIf="taskService.taskFormData.Id == ''" [disabled]="form.invalid"><i class="fas fa-database"></i>Create Task</button>
+      <button class="btn btn-info btn-lg btn-block" *ngIf="taskService.taskFormData.Id != ''"  [disabled]="form.invalid"><i class="fas fa-edit"></i>Edit Task</button>
+      <button type="reset" class="btn btn-warning btn-lg btn-block" (click)="resetTaskForm(form)" ><i class="fas fa-history"></i>Reset Form</button>
+    </div>
+</form>
